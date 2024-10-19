@@ -15,7 +15,7 @@ netScanner = Scanner()
 def main():
     # scan the network for all the devices on the network
     print(f'scanning network')
-    IP = "10.42.0.114"
+    IP = netScanner.getOwnIP()
     netMask = "24"
     type = 'ICMP'
     netScanner.scan(type, IP, netMask)
