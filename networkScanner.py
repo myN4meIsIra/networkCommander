@@ -85,20 +85,23 @@ class Scanner:
                     else:
                         logger.log(f"ping to {ip} failed", 'networkScanner')
 
-        if type == "ARP":
-            IP = f"{IP}/{netMask}"
-            arp = ARP(pdst=IP)
-            # first is to create ARP request so that we can move forward
-            broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
-            arp_request_broadcast = broadcast / arp  # send and recieve the ARP requests
 
-            answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]  # and then extract device information from responses
-            logger.log(f'answered_list = {answered_list}', 'networkScanner')
+            elif type == "ARP":
+                #IP = f"{IP}/{netMask}"
+                arp = ARP(pdst=IP)
+                # first is to create ARP request so that we can move forward
+                broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
+                arp_request_broadcast = broadcast / arp  # send and recieve the ARP requests
 
+                answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]  # and then extract device information from responses
+                logger.log(f'answered_list = {answered_list}', 'networkScanner')
 
-            for element in answered_list:
-                device_info = {"ip": element[1].psrc, "mac": element[1].hwsrc}
-                activeIPs.append(element[1].psrc)
+                # trnaslate the list of arp-request returns into the list we're acutally using
+                for element in answered_list:
+                    ip = element[1].psrc
+                    device_info = {"ip": element[1].psrc, "mac": element[1].hwsrc}
+                    logger.say(f'active device on {ip}')
+                    activeIPs.append(ip)
 
         logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')
 
