@@ -25,6 +25,7 @@ class ARP:
         resp, _ = scapy.srp(packet, timeout=1, verbose=False)
         for _, r in resp:
             sys.stdout.write(f"our mac: {r[scapy.Ether].src}")
+            sys.stdout.flush()
             return r[scapy.Ether].src
         return None
 
