@@ -105,4 +105,4 @@ class Scanner:
 
         logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')
 
-        return 1
+        return activeIPs

