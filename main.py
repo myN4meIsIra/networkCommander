@@ -29,8 +29,6 @@ def main():
 
     logger.say(f'poisoning the entire network')
 
-    return 1
-
     for device in deviceList:
         if device != IP:
             logger.say(f'poisoning {device}')
