@@ -62,9 +62,9 @@ class Scanner:
                         activeIPs.append(IP)
                         logger.say(f'active device on {IP}')
                     else:
-                        logger.log(f'no connection on {IP}:{port}')
+                        logger.log(f'no connection on {IP}:{port}', 'networkScanner')
                 except:
-                    logger.log(f'no connection on {IP}:{port}')
+                    logger.log(f'no connection on {IP}:{port}', 'networkScanner')
 
                 s.close()
 
