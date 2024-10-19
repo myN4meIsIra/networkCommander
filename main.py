@@ -17,8 +17,9 @@ def main():
     print(f'scanning network')
     IP = netScanner.getOwnIP()
     netMask = "24"
-    type = 'TCP'
+    type = 'ARP'
     netScanner.scan(type, IP, netMask)
+
 
     return 1
 

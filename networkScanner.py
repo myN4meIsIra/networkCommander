@@ -83,6 +83,22 @@ class Scanner:
                     else:
                         logger.log(f"ping to {ip} failed", 'networkScanner')
 
+            elif type == "ARP":
+                """arp = socket.ARP(pdst=IP)
+                # first is to create ARP request so that we can move forward
+                arp_request = socket.ARP(pdst=IP)
+                broadcast = socket.Ether(dst="ff:ff:ff:ff:ff:ff")
+                arp_request_broadcast = broadcast / arp_request  # send and recieve the ARP requests
+               """
+                answered_list = socket.srp(IP, timeout=1, verbose=False)[0]  # and then extract device information from responses
+
+                logger.log(f'answered_list = {answered_list}', 'networkScanner')
+
+                """
+                for element in answered_list:
+                    device_info = {"ip": element[1].psrc, "mac": element[1].hwsrc}
+                    devices_list.append(device_info)
+                """
         logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')
 
         return 1
