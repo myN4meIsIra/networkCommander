@@ -47,6 +47,7 @@ class Scanner:
             ip = IP.split('.')
             ip = f"{ip[0]}.{ip[1]}.{ip[2]}.{i}"
 
+
             # tcp scan
             if type == "TCP":
                 logger.log(f'TCP pinging ip = {ip}', 'networkScanner')
@@ -57,8 +58,10 @@ class Scanner:
 
                 try:
                     # returns 0 if connection succeeds else raises error
-                    if s.connect_ex((IP, port)):
+                    if not s.connect_ex((IP, port)):
                         activeIPs.append(IP)
+                    else:
+                        logger.log(f'no connection on {IP}:{port}')
                 except:
                     logger.log(f'no connection on {IP}:{port}')
 
