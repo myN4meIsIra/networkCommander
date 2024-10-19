@@ -35,7 +35,7 @@ class ARP:
         self.spoofWithIP = spoofWithIP
 
         if loop:
-            self.ARP_poisonThread = Process(target=self.ARP_poisonThread)
+            self.ARP_poisonThread = Process(target=self.ARP_poisoning_thread)
             self.ARP_poisonThread.start()
 
     def ARP_poisoning_thread(self):
