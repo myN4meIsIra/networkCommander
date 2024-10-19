@@ -58,7 +58,7 @@ class Scanner:
 
                 try:
                     # returns 0 if connection succeeds else raises error
-                    if not s.connect_ex((IP, port)):
+                    if s.connect_ex((IP, port)) == 0:
                         activeIPs.append(IP)
                     else:
                         logger.log(f'no connection on {IP}:{port}')
@@ -82,6 +82,6 @@ class Scanner:
                     else:
                         logger.log(f"ping to {ip} failed", 'networkScanner')
 
-            logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')
+        logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')
 
         return 1
