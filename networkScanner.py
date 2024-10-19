@@ -56,8 +56,8 @@ class Scanner:
 
                 logger.log(f'ICMP pinging ip = {ip}', 'networkScanner')
 
-                #                                    -c --> 1 ping, -i --> timeout
-                pingResponse = subprocess.call(['ping', '-c', '1', '-i', '0.5', ip])
+                #                                    -c --> 1 ping, -W --> timeout
+                pingResponse = subprocess.call(['ping', '-c', '1', '-W', '1', ip])
                 if pingResponse == 0:
                     logger.say(f'active device on {ip}')
                     activeIPs.append(ip)
