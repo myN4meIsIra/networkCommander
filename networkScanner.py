@@ -5,7 +5,7 @@
 
 import subprocess
 import socket
-from scapy.all import srp
+from scapy.all import srp, ARP, Ether
 import scapy
 import os
 
