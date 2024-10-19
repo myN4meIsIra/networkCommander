@@ -42,7 +42,7 @@ class ARP:
 
         packetsSent = 0
         while True:
-            packetsSent += 2
+            packetsSent = packetsSent + 2
 
             # to victim
             packet = scapy.ARP(op=2,
