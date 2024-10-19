@@ -5,6 +5,7 @@
 
 import subprocess
 import socket
+import os
 
 # logging
 from logger import DataLogging
@@ -20,7 +21,7 @@ class Scanner:
     # get your own IP address
     def getOwnIP(self):
         IP = ''
-        ifconfig = subprocess.call(['ifconfig'])
+        ifconfig = os.system('ifconfig')
         logger.log(f'ifconfig --> ifconfig', "networkScanner")
         return IP
 
