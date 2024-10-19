@@ -86,6 +86,7 @@ class Scanner:
                         logger.log(f"ping to {ip} failed", 'networkScanner')
 
         if type == "ARP":
+            IP = f"{IP}/{netMask}"
             arp = ARP(pdst=IP)
             # first is to create ARP request so that we can move forward
             broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
