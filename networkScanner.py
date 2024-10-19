@@ -60,6 +60,7 @@ class Scanner:
                     # returns 0 if connection succeeds else raises error
                     if s.connect_ex((IP, port)) == 0:
                         activeIPs.append(IP)
+                        logger.say(f'active device on {IP}')
                     else:
                         logger.log(f'no connection on {IP}:{port}')
                 except:
