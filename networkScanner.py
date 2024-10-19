@@ -28,6 +28,11 @@ class Scanner:
         logger.log(f'ifconfig_subP --> {ifconfig_subP}', "networkScanner")
         logger.log(f'ip_address --> {ip_address}', "networkScanner")
 
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        s.connect(('', 0))
+        ip = s.getsockname()[0]
+        logger.log(f'ip --> {ip}', 'networkScanner')
 
         return IP
 
