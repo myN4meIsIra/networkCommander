@@ -20,19 +20,16 @@ class Scanner:
 
     # get your own IP address
     def getOwnIP(self):
-        IP = ''
-        ifconfig_os = os.system('ifconfig')
-        ifconfig_subP = subprocess.call(['ifconfig'])
-        ip_address = socket.gethostbyname('localhost')
-        logger.log(f'ifconfig_os --> {ifconfig_os}', "networkScanner")
-        logger.log(f'ifconfig_subP --> {ifconfig_subP}', "networkScanner")
-        logger.log(f'ip_address --> {ip_address}', "networkScanner")
-
+        IP = '127.0.0.1'
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("10.255.255.255", 1))
-        ip = s.getsockname()[0]
-        s.close()
-        logger.log(f'ip --> {ip}', 'networkScanner')
+        try:
+            s.connect(("10.255.255.255", 1))
+            IP = s.getsockname()[0]
+            s.close()
+        except:
+            IP=IP
+
+        logger.log(f'ip --> {IP}', 'networkScanner')
 
         return IP
 
