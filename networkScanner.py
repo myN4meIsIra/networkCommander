@@ -62,7 +62,7 @@ class Scanner:
                     # returns 0 if connection succeeds else raises error
                     if s.connect_ex((IP, port)) == 0:
                         activeIPs.append(IP)
-                        logger.say(f'active device on {IP}')
+                        logger.log(f'active device on {IP}', "networkScanner")
                     else:
                         logger.log(f'no connection on {IP}:{port}', 'networkScanner')
                 except:
@@ -78,7 +78,7 @@ class Scanner:
                     #                                    -c --> 1 ping, -W --> timeout
                     pingResponse = subprocess.call(['ping', '-c', '1', '-W', '1', ip])
                     if pingResponse == 0:
-                        logger.say(f'active device on {ip}')
+                        logger.log(f'active device on {ip}', 'networkScanner')
                         activeIPs.append(ip)
                     elif pingResponse == 2:
                         logger.log(f"no response from {ip}", 'networkScanner')
@@ -100,7 +100,7 @@ class Scanner:
             for element in answered_list:
                 ip = element[1].psrc
                 device_info = {"ip": element[1].psrc, "mac": element[1].hwsrc}
-                logger.say(f'active device on {ip}')
+                logger.log(f'active device on {ip}', 'networkScanner')
                 activeIPs.append(ip)
 
         logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')

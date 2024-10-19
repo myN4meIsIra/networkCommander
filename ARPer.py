@@ -8,6 +8,7 @@ import sys
 import time
 from multiprocessing import Process
 
+
 class ARP:
     def __init__(self):
         self.targetIP = None
