@@ -23,8 +23,11 @@ class Scanner:
         IP = ''
         ifconfig_os = os.system('ifconfig')
         ifconfig_subP = subprocess.call(['ifconfig'])
+        ip_address = socket.gethostbyname('localhost')
         logger.log(f'ifconfig_os --> {ifconfig_os}', "networkScanner")
         logger.log(f'ifconfig_subP --> {ifconfig_subP}', "networkScanner")
+        logger.log(f'ip_address --> {ip_address}', "networkScanner")
+
 
         return IP
 
