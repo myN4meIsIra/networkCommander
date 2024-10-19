@@ -17,7 +17,7 @@ def main():
     print(f'scanning network')
     IP = netScanner.getOwnIP()
     netMask = "24"
-    type = 'ICMP'
+    type = 'TCP'
     netScanner.scan(type, IP, netMask)
 
     return 1
