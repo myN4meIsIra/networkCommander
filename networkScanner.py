@@ -19,7 +19,9 @@ class Scanner:
 
     # get your own IP address
     def getOwnIP(self):
-        IP = socket.gethostbyname(socket.gethostname())
+        IP = ''
+        ifconfig = subprocess.call(['ifconfig'])
+        logger.log(f'ifconfig --> ifconfig', "networkScanner")
         return IP
 
 
@@ -45,7 +47,7 @@ class Scanner:
 
                 logger.log(f'ICMP pinging ip = {ip}', 'networkScanner')
 
-                pingResponse = subprocess.call(['ping', '-c', '2', ip])
+                pingResponse = subprocess.call(['ping', '-c', '1', ip])
                 if pingResponse == 0:
                     logger.say(f'active device on {ip}')
                     activeIPs.append(ip)
