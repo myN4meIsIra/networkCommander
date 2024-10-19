@@ -5,6 +5,7 @@
 
 import subprocess
 import socket
+from socket import srp
 import os
 
 # logging
@@ -90,7 +91,7 @@ class Scanner:
                 broadcast = socket.Ether(dst="ff:ff:ff:ff:ff:ff")
                 arp_request_broadcast = broadcast / arp_request  # send and recieve the ARP requests
                """
-                answered_list = socket.srp(IP, timeout=1, verbose=False)[0]  # and then extract device information from responses
+                answered_list = srp(IP, timeout=1, verbose=False)[0]  # and then extract device information from responses
 
                 logger.log(f'answered_list = {answered_list}', 'networkScanner')
 
