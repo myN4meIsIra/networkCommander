@@ -3,11 +3,11 @@
 implementations for logging
 """
 
-class Logging:
+class DataLogging:
     def __init__(self, logging):
         self.logging = logging
         if logging:
-            self.say('logging active', "Logging")
+            self.say('logging active')
 
 
     def say(self, text):
@@ -17,10 +17,10 @@ class Logging:
 
     def log(self, text, classItsFrom):
         if self.logging:
-            print(f' <{classItsFrom}>-- \033[93m {text}\033[00m ')
+            print(f'\033[93m <{classItsFrom}>--  {text}\033[00m ')
         else:
             return 1
 
 
     def error(self, text, classItsFrom):
-        print(f' <{classItsFrom}>-- \033[91m {text}\033[00m')
+        print(f'\033[91m <{classItsFrom}>--  {text}\033[00m')

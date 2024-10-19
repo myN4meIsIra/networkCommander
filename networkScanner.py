@@ -7,8 +7,8 @@ import subprocess
 import socket
 
 # logging
-from logging import Logging
-logging = Logging(True)
+from logger import DataLogging
+logger = DataLogging(True)
 
 
 class Scanner:
@@ -36,24 +36,24 @@ class Scanner:
             # #of hosts = 2^bits - 2 -- I have -1 because the range starts at 1, so the first -1 wouldn't be needed
             hosts_range = (2**(32-(int(netMask)))) - 1
 
-            logging.log(f'netMaskRange = {hosts_range}', 'networkScanner')
+            logger.log(f'netMaskRange = {hosts_range}', 'networkScanner')
             activeIPs = []
             for i in range(1,hosts_range):
 
                 ip = IP.split('.')
                 ip = f"{ip[0]}.{ip[1]}.{ip[2]}.{i}"
 
-                logging.log(f'ICMP pinging ip = {ip}', 'networkScanner')
+                logger.log(f'ICMP pinging ip = {ip}', 'networkScanner')
 
                 pingResponse = subprocess.call(['ping', '-c', '1', ip])
                 if pingResponse == 0:
-                    logging.say(f'active device on {ip}', 'networkScanner')
+                    logger.say(f'active device on {ip}', 'networkScanner')
                     activeIPs.append(ip)
                 elif pingResponse == 2:
-                    logging.log(f"no response from {ip}", 'networkScanner')
+                    logger.log(f"no response from {ip}", 'networkScanner')
                 else:
-                    logging.log(f"ping to {ip} failed!", 'networkScanner')
+                    logger.log(f"ping to {ip} failed!", 'networkScanner')
 
-            logging.log(f'\nactive ips: {activeIPs}', 'networkScanner')
+            logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')
 
         return 1
