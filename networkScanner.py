@@ -94,11 +94,11 @@ class Scanner:
             answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]  # and then extract device information from responses
             logger.log(f'answered_list = {answered_list}', 'networkScanner')
 
-            """
+
             for element in answered_list:
                 device_info = {"ip": element[1].psrc, "mac": element[1].hwsrc}
-                devices_list.append(device_info)
-            """
+                activeIPs.append(element[1].psrc)
+
         logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')
 
         return 1
