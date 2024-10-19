@@ -26,6 +26,7 @@ class Scanner:
 
 
             print(f'netMaskRange = {hosts_range}')
+            activeIPs = []
             for i in range(1,hosts_range):
 
                 ip = IP.split('.')
@@ -34,14 +35,15 @@ class Scanner:
                 print(f'pinging ip = {ip}')
 
                 pingResponse = subprocess.call(['ping', '-c', '3', ip])
-                print(f'pingResponse = {pingResponse}')
                 if pingResponse == 0:
-                    print("ping to", ip, "OK")
+                    print(f'active device on {ip}')
+                    activeIPs.append(ip)
                 elif pingResponse == 2:
                     print("no response from", ip)
                 else:
                     print("ping to", ip, "failed!")
 
+            print(f'\nactive ips: {activeIPs}')
         return 1
 
         return 1
