@@ -36,7 +36,7 @@ def main():
 
     for device in deviceList:
         if device != IP and device != gateway:
-            logger.say(f'poisoning {device}')
+            logger.say(f'poisoning {device} to connect to {IP}')
             arp.ARP_poison(device, IP, True)
 
     return 1

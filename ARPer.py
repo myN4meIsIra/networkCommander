@@ -66,6 +66,6 @@ class ARP:
                 sys.exit()
 
 
-            sys.stdout.write("Packets sent " + str(packetsSent))
+            sys.stdout.write(f"{packetsSent} packets sent \n")
             sys.stdout.flush()
-            time.sleep(2)
+            time.sleep(5)
