@@ -8,6 +8,8 @@ import sys
 import time
 from multiprocessing import Process
 
+from logger import DataLogging
+logger = DataLogging(True)
 
 class ARP:
     def __init__(self):
@@ -22,6 +24,7 @@ class ARP:
         packet = scapy.Ether(dst='ff:ff:ff:ff')/scapy.ARP(op='who-has', pdst=ip)
         resp, _ = scapy.srp(packet, timeout=1, verbose=False)
         for _, r in resp:
+            logger.log(f"our mac: {r[scapy.Ether].src}", 'ARPer')
             return r[scapy.Ether].src
         return None
 
