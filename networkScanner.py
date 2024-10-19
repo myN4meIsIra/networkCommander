@@ -52,7 +52,7 @@ class Scanner:
                 elif pingResponse == 2:
                     logger.log(f"no response from {ip}", 'networkScanner')
                 else:
-                    logger.log(f"ping to {ip} failed!", 'networkScanner')
+                    logger.log(f"ping to {ip} failed", 'networkScanner')
 
             logger.log(f'\nactive ips: {activeIPs}', 'networkScanner')
 
