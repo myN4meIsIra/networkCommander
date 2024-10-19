@@ -24,7 +24,7 @@ class ARP:
         packet = scapy.Ether(dst='ff:ff:ff:ff')/scapy.ARP(op='who-has', pdst=ip)
         resp, _ = scapy.srp(packet, timeout=1, verbose=False)
         for _, r in resp:
-            logger.log(f"our mac: {r[scapy.Ether].src}", 'ARPer')
+            sys.stdout.write(f"our mac: {r[scapy.Ether].src}")
             return r[scapy.Ether].src
         return None
 
