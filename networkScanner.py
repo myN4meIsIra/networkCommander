@@ -47,7 +47,7 @@ class Scanner:
 
                 pingResponse = subprocess.call(['ping', '-c', '1', ip])
                 if pingResponse == 0:
-                    logger.say(f'active device on {ip}', 'networkScanner')
+                    logger.say(f'active device on {ip}')
                     activeIPs.append(ip)
                 elif pingResponse == 2:
                     logger.log(f"no response from {ip}", 'networkScanner')
