@@ -19,15 +19,11 @@ class ARP:
 
     # get the mac address for a device on IP ip
     def getMacAddress(self, ip):
-        ipARP = scapy.ARP(pdst=ip)
-        broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
-
-        ARP_ip_and_message = broadcast / ipARP
-
-        ARP_return = scapy.srp(ARP_ip_and_message, timeout=1, verbose=False)[0]
-
-        mac = ARP_return[0][1].hwsrc
-        return mac
+        packet = scapy.Ether(dst='ff:ff:ff:ff')/scapy.ARP(op='who-has', pdst=ip)
+        resp, _ = scapy.srp(packet, timeout=1, verbose=False)
+        for _, r in resp:
+            return r[scapy.Ether].src
+        return None
 
 
     # spoof the ARP
