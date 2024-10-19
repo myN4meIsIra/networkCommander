@@ -29,9 +29,9 @@ class Scanner:
         logger.log(f'ip_address --> {ip_address}', "networkScanner")
 
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-        s.connect(('', 0))
+        s.connect("10.255.255.255", 1)
         ip = s.getsockname()[0]
+        s.close()
         logger.log(f'ip --> {ip}', 'networkScanner')
 
         return IP
