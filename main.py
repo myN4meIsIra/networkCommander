@@ -37,7 +37,7 @@ def main():
         target = input("which of the available IP addresses would you like to poison? (I won't let you poison the gateway or yourself)\nAlternatively, type \"all\" to poison everyone")
 
         if target in deviceList and target != IP and target != gateway and str(target) != 'all':
-            logger.say(f'poisoning {device} to connect to {IP}')
+            logger.say(f'poisoning {target} to connect to {IP}')
             arp.ARP_poison(target, IP, True)
             break
 
