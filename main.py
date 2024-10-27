@@ -28,7 +28,12 @@ def main():
 
     logger.say(f'active devices: {deviceList}')
 
-    logger.say(f'poisoning the entire network')
+    while True:
+        target = input("which of the available IP addresses would you like to poison? (I won't let you poison the gateway)")
+
+        if target in deviceList:
+            break
+        logger.error(f"Um... {target} isn't in the list of available IP targets")
 
     # identify the gateway
     gws = netifaces.gateways()

